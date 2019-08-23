@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="http://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        window.onload = function () {
+            new Vue({
+                el: '#root',
+                data: {
+                    title: '美女图片',
+                    flag: true,
+                    a1: 'a1',
+                    a2: 'a2',
+                    a3: 'a3',
+                    a4: {color: 'pink'},
+                    url: 'http://b-ssl.duitang.com/uploads/item/201808/27/20180827043223_twunu.jpg',
+                    url2: ''
+
+                }
+
+            })
+        }
+    </script>
+    <style>
+        .a1 {
+            color: red;
+            font-size: 25px;
+            border: 1px solid #ff6600;
+            background: pink;
+        }
+
+        .a2 {
+            background: blue;
+        }
+
+        .a3 {
+            color: pink;
+        }
+    </style>
+</head>
+<body>
+<div id="root">
+    <!-- <img v-bind:src="url" width="700" height="600" :title="title">-->
+    <img v-bind:src="flag?url:url2" width="700" height="600" :title="title">
+
+    <!--单个引用-->
+    <div :class="a1">周宇</div>
+    <!--多个引用,后面的会覆盖前面的-->
+    <div :class="[a1,a2]">周宇</div>
+
+    <!--通过boolean判断样式-->
+    <div :class="{'a3':flag}">笑笑</div>
+
+    <div :style="{color:'red',background:'pink'}">周小宇</div>
+    <div :style="a4">东皇太一</div>
+</div>
+</body>
+</html>
+

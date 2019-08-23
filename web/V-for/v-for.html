@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <script src="http://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Title</title>
+    <script>
+        window.onload = function () {
+            new Vue({
+                el: '#root',
+                data: {
+                    msg: 'hello world',
+                    age: 18,
+                    flag:false,
+                    arr: ['aa', 'bb', 'cc'],
+                    obj: {name: '周宇', id: 21},
+                    lists: [
+                        {name: '周宇', id: 21},
+                        {name: '东皇', id: 20},
+                        {name: '虞姬', id: 22}
+                    ]
+                },
+                methods: {
+                    click1: function () {
+                        this.age = 20;
+                    },
+                    mouseover(){
+                        this.age=200
+                    },
+                    mouseout(){
+                        this.age=300
+                    },
+                    click2(){
+                        this.age=400
+                    }
+
+                }
+
+
+            })
+        }
+    </script>
+</head>
+<body>
+<div id="root">
+    <div>{{msg}}--{{age}}</div>
+    <ul>
+        <li v-for="(v,i) in arr">
+            {{v}}————{{i}}
+        </li>
+    </ul>
+    <!--arr对应data里面的arr,
+        v是数组里面的值,i是索引:值在数组里面的位置
+    -->
+    <ul>
+        <li v-for="(v,key) in obj">
+            {{v}}————{{key}}
+        </li>
+    </ul>
+    <ul>
+        <li v-for="(v,key) in lists">
+            {{v}}————{{key}}————{{v.name}}
+            <!--v是对象,key是索引值-->
+        </li>
+    </ul>
+
+    <button v-on:click="click1">click1</button>
+    <button v-on:mouseover="mouseover">mouseover</button>
+    <button v-on:mouseout="mouseout">mouseout</button>
+    <button @dblclick="click2">click2</button>
+
+    <!--隐藏显示内容-->
+    <button v-show="flag">是否显示</button>
+    <button v-show="age==18">年龄81的时候显示</button>
+
+    <!--使用if else-->
+    <p v-if="age==18">年龄为18</p>
+    <p v-else-if="age==20">年龄为20</p>
+    <p v-else>not</p>
+
+    <!--三目表达式-->
+    <p v-if="flag?age=18:age=20">{{age}}</p>
+
+</div>
+</body>
+</html>
