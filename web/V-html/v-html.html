@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="http://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        window.onload = function () {
+            new Vue({
+                el: "#root",
+                data: {
+                    msg: '周宇',
+                    age: 21,
+                    arr:[],
+                    radioV:'',
+                    che:false,
+                    html: "<p>江苏省</p>",
+                    items:[
+                        {text:'虞姬',value:'0'},
+                        {text:'公孙离',value:'1'},
+                        {text:'伽罗',value:'2'}
+                    ],
+                    selected:'2'
+                }
+            })
+
+        }
+    </script>
+    <style>
+        /*必须配置样式*/
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div id="root">
+    <div v-cloak>
+        {{msg}}--{{age}}
+    </div>
+    <div v-text="msg">
+    </div>
+    <div v-html="html"></div>
+
+    <p>{{age}}</p>
+    <input type="text" v-model="age" :disabled="age==20"/>
+
+    <div>
+        <input type="checkbox" v-model="che">123{{che}}
+
+        <input type="checkbox" v-model="arr" value="0"/>老师
+        <input type="checkbox" v-model="arr" value="1"/>学生
+        <input type="checkbox" v-model="arr" value="2"/>家长
+        {{arr}}
+    </div>
+    <div>
+        <input type="radio" v-model="radioV" name="test" value="0">男
+        <input type="radio" v-model="radioV" name="test" value="1">女
+        {{radioV}}
+    </div>
+    <div>
+        <select  v-model="selected">
+            <option v-for="(v,i) in items" v-bind:value="v.value">{{v.text}}</option>
+        </select>
+        {{selected}}
+
+    </div>
+
+</div>
+</body>
+</html>
