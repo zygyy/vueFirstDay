@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="http://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        window.onload = function () {
+            new Vue({
+                el:"#root",
+                data:{
+                    cur2:1,
+                    cur:1,
+                    Title:['标题一','标题二','标题三'],
+                    Context:['内容一','内容二','内容三']
+                }
+
+            })
+        }
+    </script>
+    <style>
+        ul,li{
+            padding: 0;margin: 0;
+        }
+        .tab-tit li{
+            padding: 10px 15px;
+            text-align: center;
+            list-style: none;
+            cursor: pointer;
+            display: inline-block;
+        }
+        .tab-tit .active{
+            color: aqua;
+            border-bottom: 1px solid aqua;
+        }
+        .tab-con div{
+            margin: 30px;
+        }
+    </style>
+</head>
+<body>
+<div id="root">
+    <ul class="tab-tit">
+        <li @click="cur=0" :class="{active:cur==0}">标题一</li>
+        <li @click="cur=1" :class="{active:cur==1}">标题二</li>
+        <li @click="cur=2" :class="{active:cur==2}">标题三</li>
+    </ul>
+    <div class="tab-con">
+        <div v-show="cur==0">内容1</div>
+        <div v-show="cur==1">内容2</div>
+        <div v-show="cur==2">内容3</div>
+    </div>
+
+    <ul class="tab-tit">
+        <li v-for="(value,index) in Title" @click="cur2=index" :class="{active:cur2==index}">{{value}}</li>
+    </ul>
+    <div>
+        <div v-for="(value,index) in Context" v-show="cur2==index">{{value}}</div>
+    </div>
+
+</div>
+</body>
+</html>
