@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="http://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        window.onload=function () {
+            new Vue({
+                el: "#root",
+                methods:{
+                    enter(e){
+                        console.log(e)
+                        console.log("enter...")
+                    },
+                    key(e){
+                        console.log(e)
+                        console.log("key...")
+                    }
+                }
+
+            })
+        }
+
+    </script>
+</head>
+<body>
+<div id="root">
+    <div>
+    <!--键盘按键keyCode-->
+    <input type="text" @keydown.13="enter()">实例1
+    <input type="text" @keydown.enter="enter($event)">实例2
+    <input type="text" @keydown.a="key($event)">
+    </div>
+    <div>
+        <!--组合键Alt+Enter，不可以使用英文-->
+        <input type="text" @keydown.alt.13="key($event)">
+
+    </div>
+</body>
+</html>

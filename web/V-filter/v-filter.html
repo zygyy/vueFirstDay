@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="http://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        window.onload = function () {
+            /*全局指令*/
+            Vue.filter("addZero", function (num) {
+                return num < 10 ? '0' + num : num;
+            })
+
+            new Vue({
+                el: "#root",
+                data: {
+                    curTime: '1567384837'
+                },
+                filters: {
+                    //数字保留几位小数
+                    number: function (num, n) {
+                        return num.toFixed(n);
+                    },
+                    date(data) {
+                        let d = new Date(data * 1000);
+                        return d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate();
+
+                    }
+                }
+            })
+        }
+    </script>
+</head>
+<body>
+<div id="root">
+    <div>{{1 | addZero}}</div>
+    <!--过滤器可以传参数-->
+    <div>{{3.141592653 | number(3)}}</div>
+    <div> {{curTime | date}}</div>
+</div>
+</body>
+</html>
