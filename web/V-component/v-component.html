@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="http://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        window.onload = function () {
+            /*方式1：定义组件*/
+            var myComp = Vue.extend({
+                /*必须要一个根节点*/
+                template: '<div><h1>hello component</h1><div>周宇</div></div>'
+            })
+
+            /*注意命名规范 连接符-*/
+            Vue.component('hello-world', myComp);
+
+
+            /*方式2*/
+            Vue.component('my-world', {
+                template: '<h2>周瑜</h2>'
+
+            })
+            new Vue({
+                el: "#root",
+                data: {},
+                components: {
+                    'my-address': {
+                        template: '<h3>江苏南通海安雅周</h3>'
+                    },
+                    'my-address2': {
+                        template: '#myAddress2',
+                        data: function () {
+                            return {
+                                title: "title",
+                                list: [1, 2, 3, 4, 5]
+                            }
+
+                        }
+                    },
+                    'my-table': {
+                        template: "#myTab",
+                        data: function () {
+                            return {
+                                cur2: 1,
+                                Title: ['标题一', '标题二', '标题三'],
+                                Context: ['内容一', '内容二', '内容三']
+
+                            }
+
+                        }
+
+                    }
+
+                }
+            })
+        }
+    </script>
+
+    <style>
+        ul, li {
+            padding: 0;
+            margin: 0;
+        }
+
+        .tab-tit li {
+            padding: 10px 15px;
+            text-align: center;
+            list-style: none;
+            cursor: pointer;
+            display: inline-block;
+        }
+
+        .tab-tit .active {
+            color: aqua;
+            border-bottom: 1px solid aqua;
+        }
+
+        .tab-con div {
+            margin: 30px;
+        }
+    </style>
+
+    <template id="myAddress2">
+        <div>
+            <p>{{title}}</p>
+            <ul>
+                <li v-for="(v,i) in list">{{v}}</li>
+            </ul>
+        </div>
+    </template>
+
+    <template id="myTab">
+        <div>
+            <ul class="tab-tit">
+                <li v-for="(value,index) in Title" @click="cur2=index" :class="{active:cur2==index}">{{value}}</li>
+            </ul>
+            <div>
+                <div v-for="(value,index) in Context" v-show="cur2==index">{{value}}</div>
+            </div>
+        </div>
+    </template>
+</head>
+<body>
+<div id="root">
+    <hello-world></hello-world>
+    <my-world></my-world>
+    <my-address></my-address>
+    <my-address2></my-address2>
+    <my-table></my-table>
+
+</div>
+</body>
+</html>
