@@ -23,7 +23,11 @@
             })
             new Vue({
                 el: "#root",
-                data: {},
+                data: {
+                    flag: 'my-table',
+                    flag2:'my-change1'
+
+                },
                 components: {
                     'my-address': {
                         template: '<h3>江苏南通海安雅周</h3>'
@@ -45,11 +49,33 @@
                                 cur2: 1,
                                 Title: ['标题一', '标题二', '标题三'],
                                 Context: ['内容一', '内容二', '内容三']
+                            }
+                        }
 
+                    },
+                    'my-tr': {
+                        template: "#myTr"
+                    },
+                    'my-slot': {
+                        template: "#mySlot"
+                    },
+                    'my-change1':{
+                        template:'<h1>{{x}}</h1>',
+                        data:function () {
+                            return {
+                                x:Math.random()
                             }
 
                         }
+                    },
+                    'my-change2':{
+                        template:'<h3>{{x}}</h3>',
+                        data:function () {
+                            return {
+                                x:Math.random()
+                            }
 
+                        }
                     }
 
                 }
@@ -100,14 +126,71 @@
             </div>
         </div>
     </template>
+
+    <template id="myTr">
+        <tr>
+            <td>周瑜</td>
+            <td>周宇</td>
+        </tr>
+    </template>
+
+    <template id="mySlot">
+        <div>
+            <p>my slot</p>
+            <slot name="s1"></slot>
+            <p>xxxxxxxx</p>
+            <slot name="s2"></slot>
+        </div>
+
+    </template>
+
+
 </head>
 <body>
 <div id="root">
+    <!--创建组件-->
     <hello-world></hello-world>
     <my-world></my-world>
     <my-address></my-address>
     <my-address2></my-address2>
     <my-table></my-table>
+
+    <!--组件高级用法-->
+    <table border="1">
+        <!--  <my-tr></my-tr>-->
+        <!--is指令：表示是一个组件-->
+        <tr is="my-tr"></tr>
+    </table>
+
+    <!--插槽-->
+    <!--设计模式  模板模式-->
+    <my-slot>
+        <ul slot="s1">
+            <li>111</li>
+            <li>222</li>
+        </ul>
+        <ul slot="s2">
+            <li>aaa</li>
+            <li>bbb</li>
+        </ul>
+    </my-slot>
+
+    <!--动态组件-->
+    <button @click="flag='my-table'">my--table</button>
+    <button @click="flag='my-address'">my--address</button>
+    <!--bind:is data变量-->
+    <component :is="flag"></component>
+
+    <!--状态-->
+    <button @click="flag2='my-change1'">my--change1</button>
+    <button @click="flag2='my-change2'">my--change2</button>
+    <!--bind:is data变量-->
+   <!-- <component :is="flag2"></component>-->
+
+    <!--缓存非活动组件-->
+    <keep-alive>
+        <component :is="flag2"></component>
+    </keep-alive>
 
 </div>
 </body>
